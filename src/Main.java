@@ -3,8 +3,5 @@ public class Main {
         // I need to understand how many players will be
         // I need to shuffle the deck and give cards to the players
 
-
-// add sm info
-
     }
 }
