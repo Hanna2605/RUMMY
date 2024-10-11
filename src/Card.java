@@ -14,4 +14,10 @@ public class Card {
     public String getRank() {
         return rank;
     }
+    // Display the card as "Rank of Suit"
+    @Override
+    public String toString() {
+        return rank + " of " + suit;
+    }
+
 }
