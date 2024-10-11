@@ -4,7 +4,7 @@ public class Main {
         // I need to shuffle the deck and give cards to the players
 
 
-
+// add sm info
 
     }
 }
