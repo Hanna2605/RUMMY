@@ -3,7 +3,6 @@ public class Card {
     String suit; // e.g., "Hearts", "Spades"
     String rank; // e.g., "2", "3", "King", "Ace"
 
-
     public Card(String suit, String rank) {
         this.suit = suit;
         this.rank = rank;
