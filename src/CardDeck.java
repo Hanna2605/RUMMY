@@ -7,7 +7,7 @@ public class CardDeck extends CardGroup {
     }
     // Method to shuffle the cards
     public void shuffle() {
-        Collections.shuffle(cards);
+        Collections.shuffle(this.cards);
     }
     // Method to populate the deck with a full set of 52 cards
     public void populateFullDeck() {
@@ -16,12 +16,8 @@ public class CardDeck extends CardGroup {
 
         for (String suit : suits) {
             for (String rank : ranks) {
-                cards.add(new Card(rank, suit));
+                cards.add(new Card(suit, rank));
             }
         }
     }
-
-
-
-
 }

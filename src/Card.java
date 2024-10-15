@@ -1,3 +1,4 @@
+
 public class Card {
     // here I have a class Card which means the structure of the card
     String suit; // e.g., "Hearts", "Spades"
