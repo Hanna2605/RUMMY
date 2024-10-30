@@ -118,6 +118,24 @@ public class Main {
         sequence6.addCard(new Card("Hearts", "Queen"));
         sequence6.addCard(new Card("Hearts", "King"));
         System.out.println("Test 6 (in order, valid): " + sequence6.isValid()); // Should be true
+
+        //failing tests to fix
+        CardSequence failCaseRank = new CardSequence();
+        failCaseRank.addCard(new Card("Diamonds", "7"));
+        failCaseRank.addCard(new Card("Hearts", "7"));
+        failCaseRank.addCard(new Card("Spades", "7"));
+        failCaseRank.addCard(new Card("Diamonds", "7"));
+        System.out.println("Test 7 (same rank, WANT FALSE): " + failCaseRank.isValid());
+        
+        CardSequence failCaseOrder = new CardSequence();
+        failCaseOrder.addCard(new Card("Hearts", "9"));
+        failCaseOrder.addCard(new Card("Hearts", "10"));
+        failCaseOrder.addCard(new Card("Hearts", "Jack"));
+        failCaseOrder.addCard(new Card("Hearts", "Queen"));
+        failCaseOrder.addCard(new Card("Hearts", "King"));
+        System.out.println("Test 8 (in order, WANT TRUE): " + failCaseOrder.isValid()); // Should be true
+
+
     }
 }
 
