@@ -1,5 +1,37 @@
+import java.util.ArrayList;
 
 public class CardSequence extends CardGroup {
+
+    public CardSequence() {
+    }
+
+    public void addCardInOrder(Card card) {
+        // If the list is empty, simply add the first card
+        if (this.cards.isEmpty()) {
+            this.cards.add(card);
+            return;
+        }
+
+        // Check if the suit matches the suit of the first card
+        String firstCardSuit = this.cards.get(0).getSuit();
+        if (!card.getSuit().equals(firstCardSuit)) {
+            // If the suit doesn't match, don't add the card
+            return;
+        }
+
+        // Find the correct position to insert the card based on its rank
+        for (int i = 0; i < this.cards.size(); i++) {
+            // Compare ranks using the getRankAsInt method
+            if (getRankAsInt(card.getRank()) < getRankAsInt(this.cards.get(i).getRank())) {
+                // Insert the card before the first card with a higher rank
+                this.cards.add(i, card);
+                return;
+            }
+        }
+
+        // If no suitable place was found, add the card at the end
+        this.cards.add(card);
+    }
 
     public boolean hasMinimumCount() {
         int n = 3;
@@ -40,7 +72,7 @@ public class CardSequence extends CardGroup {
         }
 
     public boolean areAllInOrder() {
-        if (this.cards.size() == 3 || this.cards.size() == 4) {
+        if (this.cards.size() >= 3) {
             for (int i = 0; i < this.cards.size() - 1; i++) {
                 int num1 = getRankAsInt(this.cards.get(i).getRank());
                 int num2 = getRankAsInt(this.cards.get(i + 1).getRank());
@@ -59,13 +91,13 @@ public class CardSequence extends CardGroup {
         boolean hasMinimumCards = hasMinimumCount();
 
         // Check if the cards are all of the same suit
-        boolean allSameSuit = areAllSameRank();
+        boolean allSameSuit = areAllSameRank(); //???
 
         // Check if the cards are all in sequential order
         boolean allInOrder = areAllInOrder();
 
         // The sequence is valid if it has the minimum number of cards
         // and either all cards are the same suit or they are all in order
-        return hasMinimumCards && (allSameSuit || allInOrder);
+        return hasMinimumCards && (allSameSuit || allInOrder);  //???
     }
 }

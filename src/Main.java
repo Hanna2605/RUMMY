@@ -39,6 +39,9 @@ public class Main {
                 playerA.addCard(dealtCard);
             }
         }
+
+        CardSequence myCardCombination = new CardSequence();
+
         // Display the remaining cards in cardDeck
         System.out.println("Remaining cards in cardDeck: " + deck.getSize());
         for (Card card : deck.getCards()) {
