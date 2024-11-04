@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class CardSequence extends CardGroup {
 
@@ -42,14 +43,18 @@ public class CardSequence extends CardGroup {
         if (this.cards.size() < 3 || this.cards.size() > 4) {
             return false;
         }
-        // Compare the rank of the first card with the other cards
-        String firstRank = this.cards.get(0).getRank();  // Get the suit of the first card
-        for (int i = 1; i < this.cards.size(); i++) {
-            if(!firstRank.equals(this.cards.get(i).getRank())) {
+
+        // Store the rank and suit of the first card
+        String firstRank = this.cards.get(0).getRank();
+        HashSet<String> uniqueSuits = new HashSet<>();  // Track unique suits
+
+        for (Card card : this.cards) {
+            // Check for rank consistency and track unique suits
+            if (!firstRank.equals(card.getRank()) || !uniqueSuits.add(card.getSuit())) {
                 return false;
             }
         }
-        return true;
+        return true; // All cards are the same rank with different suits and no duplicates
     }
         // Helper method to convert card rank to an integer for comparison
         public int getRankAsInt(String rank) {
@@ -87,17 +92,36 @@ public class CardSequence extends CardGroup {
         return false;
     }
     public boolean isValid() {
-        // Check if the card sequence meets the minimum count requirement
+        // Ensure minimum count of cards
         boolean hasMinimumCards = hasMinimumCount();
 
-        // Check if the cards are all of the same suit
-        boolean allSameSuit = areAllSameRank(); //???
+        // Check for same rank without duplicates
+        boolean allSameRank = areAllSameRank();
 
-        // Check if the cards are all in sequential order
-        boolean allInOrder = areAllInOrder();
+        // Check for sequential order with suit consistency
+        boolean allInOrder = areAllInOrder() && sameSuit();
 
-        // The sequence is valid if it has the minimum number of cards
-        // and either all cards are the same suit or they are all in order
-        return hasMinimumCards && (allSameSuit || allInOrder);  //???
+        // Validate based on minimum cards and either all same rank or in order
+        return hasMinimumCards && (allSameRank || allInOrder);
+    }
+
+    // Helper to check if all cards are the same suit
+    private boolean sameSuit() {
+        if (this.cards.isEmpty()) {
+            return true;  // No cards, no suit to compare, consider it valid
+        }
+
+        String suit = this.cards.get(0).getSuit();
+        if (suit == null) {
+            return false;  // If the first card's suit is null, return false
+        }
+
+        for (Card card : this.cards) {
+            // Check if any card has a null suit or a different suit
+            if (card == null || card.getSuit() == null || !card.getSuit().equals(suit)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
