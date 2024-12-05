@@ -11,12 +11,14 @@ public class CardDeck extends CardGroup {
     }
     // Method to populate the deck with a full set of 52 cards
     public void populateFullDeck() {
-        String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
-        String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
+        String[] suits = {"h", "d", "c", "s"};
+        String[] ranks = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"};
 
-        for (String suit : suits) {
-            for (String rank : ranks) {
-                cards.add(new Card(suit, rank));
+        for (int i = 0; i < 2; i++) {
+            for (String suit : suits) {
+                for (String rank : ranks) {
+                    cards.add(new Card(suit, rank));
+                }
             }
         }
     }
