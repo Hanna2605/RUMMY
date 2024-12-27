@@ -30,4 +30,13 @@ public class CardGroup {
     public int getSize() {
         return this.cards.size();
     }
+
+    public boolean hasCard(String rank, String suit){
+        for (int i = 0; i <cards.size(); i++){
+            if (cards.get(i).getRank().equals(rank) && cards.get(i).getSuit().equals(suit)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

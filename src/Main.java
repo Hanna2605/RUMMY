@@ -65,12 +65,12 @@ public class Main {
                         "card0rank:card0suit card1rank:card1suite... " +
                         "{any other cards delimited by space} ");
 
-                System.out.print("Enter command: ");
+                System.out.print("Enter cards: ");
                 //delete not needed spaces from user at the beginning and in the end of the input
-                String inputCard = scanner.nextLine().trim();
+                String inputCard = scanner.nextLine();
 
                 // create an Arraylist for adding cards from user's input
-                CardGroup setCards = new CardGroup();
+                CardGroup cardsToPut = new CardGroup();
 
                 // Split the input into individual card representations
                 String[] cardStrings = inputCard.split(" ");
@@ -86,40 +86,24 @@ public class Main {
                         String rankCard = parts[0];
                         String suitCard = parts[1];
 
-                        for (int m = 0; m < ranks.length; m++){
-                            if(ranks[m].equals(rankCard)){
-                                if(suits[m].equals(suitCard)){
-                                    // Add the card to the set
-                                    setCards.addCard(new Card(rankCard, suitCard)); // Assuming Card has a constructor (String rank, String suit)
-                                }
+                        if (Card.isValidRankCard(rankCard) && Card.isValidSuitCard(suitCard)) {
+
+                            if (playerOne.hasCard(rankCard, suitCard)) {
+                                cardsToPut.addCard(new Card(rankCard, suitCard)); // Assuming Card has a constructor (String rank, String suit)
+                                System.out.println("You add card " + rankCard + ":" + suitCard);
+                            } else {
+                                System.out.println("You don't have card " + rankCard + ":" + suitCard);
                             }
                         }
-                    }
-                    else {
+                        else{
+                            System.out.println("Your card format invalid " + rankCard + ":" + suitCard);
+                        }
+                    } else {
                         System.out.println("Invalid card format: " + cardStr);
-                        break;
-                    }
-                    // I bring to the same type the array of cards initially dealt to Player One
-                    CardGroup playerOneCards = new CardGroup();
-                    for (int a = 0; a < playerOne.getSize(); a++) {
-                        String cardPOneRank = playerOne.getCards().get(a).getRank();
-                        String cardPOneSuit = playerOne.getCards().get(a).getSuit();
-                        playerOneCards.addCard(new Card(cardPOneRank, cardPOneSuit));
-                    }
-
-                    for (int m = 0; m < setCards.getSize(); m++) {
-                        Card cardInput = setCards.getCards().get(m);
-                        for (int k = 0; k < playerOne.getSize(); k++) {
-                            Card cardPlayerOne = playerOne.getCards().get(k);
-                            if (!cardInput.equals(cardPlayerOne)) {
-                                System.out.println("You don't have such card to choose");
-                                break;
-                            }
-                        }
-
                     }
                 }
             }
         }
     }
 }
+
